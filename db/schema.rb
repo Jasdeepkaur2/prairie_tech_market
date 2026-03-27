@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_03_27_071526) do
+ActiveRecord::Schema[8.1].define(version: 2026_03_27_072235) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.integer "author_id"
     t.string "author_type"
@@ -121,7 +121,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_27_071526) do
     t.string "name"
     t.string "phone"
     t.string "postal_code"
-    t.integer "province_id", null: false
+    t.integer "province_id"
     t.datetime "remember_created_at"
     t.datetime "reset_password_sent_at"
     t.string "reset_password_token"
