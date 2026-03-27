@@ -4,7 +4,6 @@ class User < ApplicationRecord
   belongs_to :province, optional: true
   has_many :orders
   validates :name, presence: true
-  validates :phone, presence: true, allow_blank: true
 
   def self.ransackable_attributes(auth_object = nil)
     ["id", "name", "email", "admin", "city", "address", "postal_code", "province_id", "created_at", "updated_at"]
