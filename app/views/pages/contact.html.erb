@@ -5,14 +5,8 @@
       <li class="breadcrumb-item active">Contact</li>
     </ol>
   </nav>
-  <h1 class="mb-4">Contact Us</h1>
-  <div class="row">
-    <div class="col-md-6">
-      <p><strong>Prairie Tech Market</strong></p>
-      <p>📍 Winnipeg, Manitoba, Canada</p>
-      <p>📧 info@prairietechmarket.ca</p>
-      <p>📞 (204) 555-0199</p>
-      <p>🕐 Mon-Fri: 9am - 6pm | Sat: 10am - 5pm</p>
-    </div>
-  </div>
+  <% if @page %>
+    <h1 class="mb-4"><%= @page.title %></h1>
+    <div class="lead"><%= simple_format(@page.body) %></div>
+  <% end %>
 </div>

@@ -275,3 +275,15 @@ admin = User.find_or_create_by!(email: "admin@prairietechmarket.ca") do |u|
   u.admin = true
 end
 puts "Admin created: #{admin.email}"
+
+puts "Seeding pages..."
+Page.find_or_create_by!(slug: "about") do |p|
+  p.title = "About Prairie Tech Market"
+  p.body = "Prairie Tech Market is a Winnipeg-based electronics retailer with over 8 years of experience. We specialize in computer components, gaming accessories, and home office electronics. Our knowledgeable staff help customers find exactly what they need. We serve tech professionals, gamers, students, and businesses across Manitoba and Canada."
+end
+
+Page.find_or_create_by!(slug: "contact") do |p|
+  p.title = "Contact Us"
+  p.body = "Prairie Tech Market\n📍 Winnipeg, Manitoba, Canada\n📧 info@prairietechmarket.ca\n📞 (204) 555-0199\n🕐 Mon-Fri: 9am - 6pm | Sat: 10am - 5pm"
+end
+puts "Pages seeded."

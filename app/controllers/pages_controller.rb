@@ -1,5 +1,11 @@
 class PagesController < ApplicationController
   def home; end
-  def about; end
-  def contact; end
+
+  def about
+    @page = Page.find_by(slug: "about")
+  end
+
+  def contact
+    @page = Page.find_by(slug: "contact")
+  end
 end
