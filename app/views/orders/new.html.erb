@@ -1,2 +1,63 @@
-<h1>Orders#new</h1>
-<p>Find me in app/views/orders/new.html.erb</p>
+<div class="container my-4">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><%= link_to "Home", root_path %></li>
+      <li class="breadcrumb-item"><%= link_to "Cart", cart_path %></li>
+      <li class="breadcrumb-item active">Checkout</li>
+    </ol>
+  </nav>
+  <h1 class="mb-4">Checkout</h1>
+  <div class="row">
+    <div class="col-md-7">
+      <div class="card mb-4">
+        <div class="card-header bg-dark text-white"><h5 class="mb-0">Shipping Information</h5></div>
+        <div class="card-body">
+          <%= form_with url: orders_path, method: :post do |f| %>
+            <div class="mb-3">
+              <label class="form-label">Full Name</label>
+              <%= f.text_field :name, value: current_user.name, class: "form-control", required: true %>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Address</label>
+              <%= f.text_field :address, value: current_user.address, class: "form-control", required: true %>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">City</label>
+              <%= f.text_field :city, value: current_user.city, class: "form-control", required: true %>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Province</label>
+              <%= f.select :province_id,
+                options_for_select(@provinces.map { |p| [p.name, p.id] }, current_user.province_id),
+                { prompt: "Select Province" }, class: "form-select", required: true %>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Postal Code</label>
+              <%= f.text_field :postal_code, value: current_user.postal_code, class: "form-control", required: true %>
+            </div>
+            <%= f.submit "Place Order", class: "btn btn-warning btn-lg w-100" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-5">
+      <div class="card">
+        <div class="card-header bg-dark text-white"><h5 class="mb-0">Order Summary</h5></div>
+        <div class="card-body">
+          <% @cart_items.each do |item| %>
+            <div class="d-flex justify-content-between mb-2">
+              <span><%= item[:product].name %> x<%= item[:quantity] %></span>
+              <span>$<%= number_with_precision(item[:product].price * item[:quantity], precision: 2) %></span>
+            </div>
+          <% end %>
+          <hr>
+          <div class="d-flex justify-content-between fw-bold">
+            <span>Subtotal</span>
+            <span>$<%= number_with_precision(@subtotal, precision: 2) %></span>
+          </div>
+          <p class="text-muted small mt-2">Tax will be calculated based on your province.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

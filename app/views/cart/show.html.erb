@@ -1,0 +1,67 @@
+<div class="container my-4">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><%= link_to "Home", root_path %></li>
+      <li class="breadcrumb-item active">Shopping Cart</li>
+    </ol>
+  </nav>
+  <h1 class="mb-4">Shopping Cart</h1>
+  <% if @cart_items.empty? %>
+    <div class="alert alert-info">
+      Your cart is empty. <%= link_to "Browse products", products_path %>.
+    </div>
+  <% else %>
+    <div class="table-responsive">
+      <table class="table align-middle">
+        <thead class="table-dark">
+          <tr>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Subtotal</th>
+            <th>Remove</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @cart_items.each do |item| %>
+            <tr>
+              <td>
+                <%= link_to item[:product].name, product_path(item[:product]) %>
+              </td>
+              <td>$<%= number_with_precision(item[:product].price, precision: 2) %></td>
+              <td>
+                <%= form_with url: update_item_cart_path, method: :patch do |f| %>
+                  <%= f.hidden_field :product_id, value: item[:product].id %>
+                  <div class="d-flex align-items-center gap-2">
+                    <%= f.number_field :quantity, value: item[:quantity], min: 1, class: "form-control form-control-sm", style: "width: 70px;" %>
+                    <%= f.submit "Update", class: "btn btn-sm btn-outline-secondary" %>
+                  </div>
+                <% end %>
+              </td>
+              <td>$<%= number_with_precision(item[:product].price * item[:quantity], precision: 2) %></td>
+              <td>
+                <%= form_with url: remove_item_cart_path, method: :delete do |f| %>
+                  <%= f.hidden_field :product_id, value: item[:product].id %>
+                  <%= f.submit "Remove", class: "btn btn-sm btn-danger" %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="3" class="text-end fw-bold">Total:</td>
+            <td class="fw-bold text-success fs-5">
+              $<%= number_with_precision(@cart_items.sum { |i| i[:product].price * i[:quantity] }, precision: 2) %>
+            </td>
+            <td></td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+    <div class="d-flex justify-content-between mt-3">
+      <%= link_to "Continue Shopping", products_path, class: "btn btn-outline-dark" %>
+      <%= link_to "Proceed to Checkout", new_order_path, class: "btn btn-warning btn-lg" %>
+    </div>
+  <% end %>
+</div>

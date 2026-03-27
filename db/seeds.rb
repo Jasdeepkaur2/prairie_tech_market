@@ -265,3 +265,13 @@ products.each do |p|
 end
 
 puts "Done! #{Province.count} provinces, #{Category.count} categories, #{Product.count} products."
+
+puts "Creating admin user..."
+admin = User.find_or_create_by!(email: "admin@prairietechmarket.ca") do |u|
+  u.password = "Admin1234!"
+  u.password_confirmation = "Admin1234!"
+  u.name = "Admin User"
+  u.phone = "2045550100"
+  u.admin = true
+end
+puts "Admin created: #{admin.email}"
