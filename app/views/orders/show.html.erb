@@ -27,16 +27,37 @@
           <% @order_items.each do |item| %>
             <tr>
               <td><%= item.product.name %></td>
-              <td>$<%= number_with_precision(item.price_at_purchase, precision: 2) %></td>
+              <td><%= number_to_currency(item.price_at_purchase) %></td>
               <td><%= item.quantity %></td>
-              <td>$<%= number_with_precision(item.price_at_purchase * item.quantity, precision: 2) %></td>
+              <td><%= number_to_currency(item.price_at_purchase * item.quantity) %></td>
             </tr>
           <% end %>
         </tbody>
         <tfoot>
+          <% subtotal = @order_items.sum { |i| i.price_at_purchase * i.quantity } %>
+          <% tax = @order.total_amount - subtotal %>
           <tr>
-            <td colspan="3" class="text-end fw-bold">Total:</td>
-            <td class="fw-bold text-success">$<%= number_with_precision(@order.total_amount, precision: 2) %></td>
+            <td colspan="3" class="text-end">Subtotal:</td>
+            <td><%= number_to_currency(subtotal) %></td>
+          </tr>
+          <tr>
+            <td colspan="3" class="text-end">
+              Tax (<%= @order.province.name %>
+              <% if @order.province.hst > 0 %>
+                HST <%= (@order.province.hst * 100).round(1) %>%
+              <% else %>
+                GST <%= (@order.province.gst * 100).round(1) %>%
+                <% if @order.province.pst > 0 %>
+                  + PST <%= (@order.province.pst * 100).round(1) %>%
+                <% end %>
+              <% end %>
+              ):
+            </td>
+            <td><%= number_to_currency(tax) %></td>
+          </tr>
+          <tr class="fw-bold">
+            <td colspan="3" class="text-end">Total:</td>
+            <td class="text-success"><%= number_to_currency(@order.total_amount) %></td>
           </tr>
         </tfoot>
       </table>
