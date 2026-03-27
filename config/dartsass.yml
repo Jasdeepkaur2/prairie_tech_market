@@ -1,0 +1,7 @@
+load_paths:
+  - /Users/jasdeepkaur/.rbenv/versions/3.2.2/lib/ruby/gems/3.2.0/gems/bootstrap-5.3.8/assets/stylesheets
+build:
+  - input: app/assets/stylesheets/application.scss
+    output: app/assets/builds/application.css
+  - input: app/assets/stylesheets/active_admin.scss
+    output: app/assets/builds/active_admin.css

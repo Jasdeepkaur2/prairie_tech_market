@@ -17,9 +17,11 @@ gem "kamal", require: false
 gem "thruster", require: false
 gem "image_processing", "~> 1.2"
 gem "devise", "~> 4.9"
-gem "activeadmin", "~> 3.2"
+gem "activeadmin"
 gem "kaminari", "~> 1.2"
 gem "faker", "~> 3.6"
+gem "bootstrap", "~> 5.3"
+gem "dartsass-rails", "~> 0.5"
 
 group :development, :test do
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"

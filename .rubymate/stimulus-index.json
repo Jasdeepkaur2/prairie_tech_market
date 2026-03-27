@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "indexedAt": 1774604573527,
+  "controllers": {
+    "hello": {
+      "filePath": "/Users/jasdeepkaur/prairie_tech_market/app/javascript/controllers/hello_controller.js",
+      "targets": [],
+      "values": [],
+      "outlets": [],
+      "actions": [],
+      "classes": [],
+      "mtime": 1774594527718.5554
+    }
+  }
+}
