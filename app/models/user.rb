@@ -5,4 +5,12 @@ class User < ApplicationRecord
   has_many :orders
   validates :name, presence: true
   validates :phone, presence: true, allow_blank: true
+
+  def self.ransackable_attributes(auth_object = nil)
+    ["id", "name", "email", "admin", "city", "address", "postal_code", "province_id", "created_at", "updated_at"]
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    ["province", "orders"]
+  end
 end
