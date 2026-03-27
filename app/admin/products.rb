@@ -1,5 +1,5 @@
 ActiveAdmin.register Product do
-  permit_params :name, :description, :price, :stock, :category_id, :image
+  permit_params :name, :description, :price, :stock, :category_id, :image, :on_sale
 
   index do
     selectable_column
@@ -8,6 +8,7 @@ ActiveAdmin.register Product do
     column :category
     column(:price) { |p| number_to_currency(p.price) }
     column :stock
+    column :on_sale
     column(:image) { |p| image_tag p.image.variant(resize_to_limit: [50, 50]) if p.image.attached? }
     actions
   end
@@ -15,6 +16,7 @@ ActiveAdmin.register Product do
   filter :name
   filter :category
   filter :price
+  filter :on_sale
 
   form html: { enctype: "multipart/form-data" } do |f|
     f.inputs do
@@ -22,6 +24,7 @@ ActiveAdmin.register Product do
       f.input :description
       f.input :price
       f.input :stock
+      f.input :on_sale
       f.input :category
       f.input :image, as: :file, hint: f.object.image.attached? ? image_tag(f.object.image.variant(resize_to_limit: [100, 100])) : "No image uploaded"
     end
@@ -34,6 +37,7 @@ ActiveAdmin.register Product do
       row :description
       row(:price) { |p| number_to_currency(p.price) }
       row :stock
+      row :on_sale
       row :category
       row(:image) { |p| image_tag p.image.variant(resize_to_limit: [300, 300]) if p.image.attached? }
     end
