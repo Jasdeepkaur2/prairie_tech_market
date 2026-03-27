@@ -1,29 +1,104 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "Prairie Tech Market" %></title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="application-name" content="Prairie Tech Market">
-    <meta name="mobile-web-app-capable" content="yes">
+    <title>Prairie Tech Market</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
-    <%= yield :head %>
-
-    <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
-    <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
-
-    <link rel="icon" href="/icon.png" type="image/png">
-    <link rel="icon" href="/icon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/icon.png">
-
-    <%# Includes all stylesheet files in app/assets/stylesheets %>
-    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
-
   <body>
-    <%= yield %>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container">
+        <%= link_to "Prairie Tech Market", root_path, class: "navbar-brand fw-bold text-warning" %>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+              <%= link_to "Home", root_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Products", products_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Categories</a>
+              <ul class="dropdown-menu">
+                <% Category.all.each do |category| %>
+                  <li><%= link_to category.name, category_path(category), class: "dropdown-item" %></li>
+                <% end %>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <%= link_to "About", about_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Contact", contact_path, class: "nav-link" %>
+            </li>
+          </ul>
+          <ul class="navbar-nav ms-auto align-items-center">
+            <li class="nav-item me-2">
+              <%= link_to search_path, class: "nav-link" do %>
+                🔍 Search
+              <% end %>
+            </li>
+            <li class="nav-item me-2">
+              <%= link_to cart_path, class: "nav-link" do %>
+                🛒 Cart
+                <% if session[:cart].present? %>
+                  <span class="badge bg-warning text-dark"><%= session[:cart].values.sum %></span>
+                <% end %>
+              <% end %>
+            </li>
+            <% if user_signed_in? %>
+              <li class="nav-item">
+                <%= link_to "My Orders", orders_path, class: "nav-link" %>
+              </li>
+              <% if current_user.admin? %>
+                <li class="nav-item">
+                  <%= link_to "Admin", admin_root_path, class: "nav-link text-warning" %>
+                </li>
+              <% end %>
+              <li class="nav-item">
+                <%= link_to "Logout", destroy_user_session_path, data: { turbo_method: :delete }, class: "btn btn-outline-warning btn-sm ms-2" %>
+              </li>
+            <% else %>
+              <li class="nav-item">
+                <%= link_to "Login", new_user_session_path, class: "btn btn-outline-light btn-sm ms-2" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-warning btn-sm ms-2" %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <% if notice %>
+      <div class="alert alert-success alert-dismissible fade show m-0" role="alert">
+        <div class="container"><%= notice %></div>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+      </div>
+    <% end %>
+    <% if alert %>
+      <div class="alert alert-danger alert-dismissible fade show m-0" role="alert">
+        <div class="container"><%= alert %></div>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+      </div>
+    <% end %>
+
+    <main>
+      <%= yield %>
+    </main>
+
+    <footer class="bg-dark text-light py-4 mt-5">
+      <div class="container text-center">
+        <p class="mb-0">&copy; <%= Date.today.year %> Prairie Tech Market. All rights reserved.</p>
+        <p class="mb-0 text-muted small">Winnipeg, Manitoba, Canada</p>
+      </div>
+    </footer>
   </body>
 </html>

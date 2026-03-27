@@ -1,2 +1,21 @@
-<h1>Categories#show</h1>
-<p>Find me in app/views/categories/show.html.erb</p>
+<div class="container my-4">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><%= link_to "Home", root_path %></li>
+      <li class="breadcrumb-item"><%= link_to "Products", products_path %></li>
+      <li class="breadcrumb-item active"><%= @category.name %></li>
+    </ol>
+  </nav>
+  <h1 class="mb-2"><%= @category.name %></h1>
+  <p class="text-muted mb-4"><%= @category.description %></p>
+  <div class="row g-3">
+    <% @products.each do |product| %>
+      <div class="col-md-3 col-sm-6">
+        <%= render 'products/product_card', product: product %>
+      </div>
+    <% end %>
+  </div>
+  <div class="mt-4">
+    <%= paginate @products %>
+  </div>
+</div>
