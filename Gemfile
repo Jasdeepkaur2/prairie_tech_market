@@ -16,7 +16,7 @@ gem "bootsnap", require: false
 gem "kamal", require: false
 gem "thruster", require: false
 gem "image_processing", "~> 1.2"
-gem "devise", "~> 4.9"
+gem "devise", "~> 5.0"
 gem "activeadmin"
 gem "kaminari", "~> 1.2"
 gem "faker", "~> 3.6"
