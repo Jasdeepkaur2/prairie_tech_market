@@ -17,12 +17,8 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav me-auto">
-            <li class="nav-item">
-              <%= link_to "Home", root_path, class: "nav-link" %>
-            </li>
-            <li class="nav-item">
-              <%= link_to "Products", products_path, class: "nav-link" %>
-            </li>
+            <li class="nav-item"><%= link_to "Home", root_path, class: "nav-link" %></li>
+            <li class="nav-item"><%= link_to "Products", products_path, class: "nav-link" %></li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Categories</a>
               <ul class="dropdown-menu">
@@ -31,18 +27,12 @@
                 <% end %>
               </ul>
             </li>
-            <li class="nav-item">
-              <%= link_to "About", about_path, class: "nav-link" %>
-            </li>
-            <li class="nav-item">
-              <%= link_to "Contact", contact_path, class: "nav-link" %>
-            </li>
+            <li class="nav-item"><%= link_to "About", about_path, class: "nav-link" %></li>
+            <li class="nav-item"><%= link_to "Contact", contact_path, class: "nav-link" %></li>
           </ul>
           <ul class="navbar-nav ms-auto align-items-center">
             <li class="nav-item me-2">
-              <%= link_to search_path, class: "nav-link" do %>
-                🔍 Search
-              <% end %>
+              <%= link_to "🔍 Search", search_path, class: "nav-link" %>
             </li>
             <li class="nav-item me-2">
               <%= link_to cart_path, class: "nav-link" do %>
@@ -62,7 +52,11 @@
                 </li>
               <% end %>
               <li class="nav-item">
-                <%= button_to "Logout", destroy_user_session_path, method: :delete, class: "btn btn-outline-warning btn-sm ms-2", form: { "data-turbo": "false" } %>
+                <form action="/users/sign_out" method="post" style="display:inline">
+                  <input type="hidden" name="_method" value="delete">
+                  <input type="hidden" name="<%= request.forgery_protection_token %>" value="<%= form_authenticity_token %>">
+                  <button type="submit" class="btn btn-outline-warning btn-sm ms-2">Logout</button>
+                </form>
               </li>
             <% else %>
               <li class="nav-item">
