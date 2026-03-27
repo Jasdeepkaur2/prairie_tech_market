@@ -287,3 +287,52 @@ Page.find_or_create_by!(slug: "contact") do |p|
   p.body = "Prairie Tech Market\n📍 Winnipeg, Manitoba, Canada\n📧 info@prairietechmarket.ca\n📞 (204) 555-0199\n🕐 Mon-Fri: 9am - 6pm | Sat: 10am - 5pm"
 end
 puts "Pages seeded."
+
+# Add more products to reach 100+
+additional_products = [
+  { name: "Logitech MX Master 3", description: "Advanced wireless mouse for power users with ergonomic design", price: 99.99, stock: 25, category: "Computer Components" },
+  { name: "Samsung 970 EVO 1TB NVMe", description: "High performance NVMe SSD with read speeds up to 3500MB/s", price: 129.99, stock: 30, category: "Storage" },
+  { name: "Corsair RM850x PSU", description: "850W fully modular power supply with 80 Plus Gold certification", price: 149.99, stock: 15, category: "Computer Components" },
+  { name: "ASUS ROG Swift 27\" Monitor", description: "27 inch 1440p 165Hz gaming monitor with G-Sync", price: 449.99, stock: 10, category: "Monitors & Displays" },
+  { name: "HyperX Cloud II Headset", description: "Premium gaming headset with 7.1 virtual surround sound", price: 99.99, stock: 20, category: "Gaming Accessories" },
+  { name: "Elgato Stream Deck", description: "15 customizable LCD keys for streaming and content creation", price: 149.99, stock: 12, category: "Home Office" },
+  { name: "Anker USB-C Hub 7-in-1", description: "7-in-1 USB-C hub with HDMI, USB 3.0, SD card reader", price: 49.99, stock: 35, category: "Home Office" },
+  { name: "Kingston 32GB DDR5 RAM", description: "32GB DDR5 4800MHz memory kit for next-gen platforms", price: 119.99, stock: 20, category: "Computer Components" },
+  { name: "WD Black 2TB HDD", description: "2TB 7200RPM hard drive optimized for gaming performance", price: 79.99, stock: 25, category: "Storage" },
+  { name: "Razer Huntsman Mini", description: "60% optical gaming keyboard with clicky optical switches", price: 119.99, stock: 18, category: "Gaming Accessories" },
+  { name: "LG 34\" Ultrawide Monitor", description: "34 inch 21:9 ultrawide curved monitor for immersive gaming", price: 599.99, stock: 8, category: "Monitors & Displays" },
+  { name: "TP-Link WiFi 6 Router", description: "AX3000 dual band WiFi 6 router for faster wireless speeds", price: 129.99, stock: 22, category: "Networking" },
+  { name: "Sabrent Rocket 500GB NVMe", description: "500GB NVMe SSD with PCIe 4.0 for ultra fast boot times", price: 69.99, stock: 30, category: "Storage" },
+  { name: "Corsair K95 RGB Platinum", description: "Full size mechanical gaming keyboard with Cherry MX switches", price: 199.99, stock: 14, category: "Gaming Accessories" },
+  { name: "Elgato HD60 S Capture Card", description: "External capture card for 1080p60 game streaming", price: 149.99, stock: 10, category: "Home Office" },
+  { name: "NZXT H510 Case", description: "Mid tower ATX case with tempered glass and cable management", price: 89.99, stock: 16, category: "Computer Components" },
+  { name: "Netgear 8-Port Gigabit Switch", description: "Unmanaged 8-port gigabit ethernet switch for home networks", price: 39.99, stock: 40, category: "Networking" },
+  { name: "SteelSeries Arctis 7", description: "Wireless gaming headset with 24 hour battery life", price: 149.99, stock: 18, category: "Gaming Accessories" },
+  { name: "AOC 24\" 144Hz Monitor", description: "24 inch Full HD 144Hz gaming monitor with 1ms response time", price: 229.99, stock: 20, category: "Monitors & Displays" },
+  { name: "Crucial MX500 1TB SSD", description: "1TB SATA SSD with integrated power loss immunity", price: 89.99, stock: 28, category: "Storage" },
+  { name: "Webcam Logitech C920", description: "1080p HD webcam with stereo audio and autofocus", price: 79.99, stock: 32, category: "Home Office" },
+  { name: "TP-Link 5-Port Switch", description: "Desktop ethernet switch with plug and play setup", price: 19.99, stock: 50, category: "Networking" },
+  { name: "AMD Ryzen 9 7900X", description: "12-core 24-thread desktop processor with boost up to 5.6GHz", price: 449.99, stock: 10, category: "Computer Components" },
+  { name: "NVIDIA RTX 4070 Ti", description: "High performance GPU for 4K gaming with DLSS 3 support", price: 799.99, stock: 8, category: "Computer Components" },
+  { name: "Xbox Elite Controller Series 2", description: "Pro gaming controller with adjustable tension thumbsticks", price: 179.99, stock: 15, category: "Gaming Accessories" },
+  { name: "Seagate Backup Plus 4TB", description: "4TB portable external hard drive with USB 3.0", price: 99.99, stock: 22, category: "Storage" },
+  { name: "Blue Yeti USB Microphone", description: "Professional USB microphone for streaming and podcasting", price: 129.99, stock: 18, category: "Home Office" },
+  { name: "ASUS WiFi 6E Router", description: "Tri band WiFi 6E router with 6GHz band support", price: 299.99, stock: 12, category: "Networking" },
+  { name: "Philips 32\" 4K Monitor", description: "32 inch 4K UHD monitor with HDR and USB-C connectivity", price: 349.99, stock: 11, category: "Monitors & Displays" },
+  { name: "Corsair Vengeance 16GB DDR4", description: "16GB DDR4 3200MHz RAM kit for gaming and productivity", price: 59.99, stock: 35, category: "Computer Components" },
+  { name: "SteelSeries QcK Gaming Mousepad", description: "Large gaming mousepad with micro-woven cloth surface", price: 29.99, stock: 45, category: "Gaming Accessories" },
+  { name: "Belkin 12-Outlet Surge Protector", description: "12 outlet surge protector with 8 foot power cord", price: 39.99, stock: 30, category: "Home Office" },
+]
+
+additional_products.each do |p|
+  category = Category.find_by(name: p[:category])
+  next unless category
+  Product.find_or_create_by(name: p[:name]) do |prod|
+    prod.description = p[:description]
+    prod.price = p[:price]
+    prod.stock = p[:stock]
+    prod.category = category
+  end
+end
+
+puts "Total products: #{Product.count}"
