@@ -131,7 +131,6 @@ products.each do |p|
 end
 
 puts "Done! #{Province.count} provinces, #{Category.count} categories, #{Product.count} products."
-EOFcat > db/seeds.rb << 'EOF'
 puts "Seeding provinces..."
 
 provinces = [
