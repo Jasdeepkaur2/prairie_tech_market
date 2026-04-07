@@ -1,1 +1,60 @@
 @use "bootstrap";
+
+$primary-color: #ffc107;
+$dark-color: #212529;
+$light-bg: #f8f9fa;
+$card-radius: 8px;
+$font-size-base: 16px;
+
+%card-hover {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  }
+}
+
+.product-card {
+  @extend %card-hover;
+  border-radius: $card-radius;
+  .card-title {
+    font-size: $font-size-base * 1.1;
+    font-weight: 600;
+    color: $dark-color;
+  }
+  .card-price {
+    font-size: $font-size-base * 1.25;
+    color: $primary-color;
+    font-weight: bold;
+  }
+}
+
+.navbar {
+  .navbar-brand {
+    font-size: $font-size-base * 1.4;
+    letter-spacing: 0.5px;
+  }
+  .nav-link {
+    &:hover {
+      color: $primary-color;
+    }
+  }
+}
+
+footer {
+  padding: $font-size-base * 2 0;
+  background-color: $dark-color;
+  color: $light-bg;
+}
+
+.btn-warning {
+  background-color: $primary-color;
+  border-color: $primary-color;
+  color: $dark-color;
+  font-weight: 600;
+}
+
+.page-body {
+  font-size: $font-size-base * 1.05;
+  line-height: 1.8;
+}
