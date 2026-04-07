@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     delete :remove_item
   end
 
+  get 'profile', to: 'users#profile', as: :user_profile
   resources :orders, only: [:index, :show, :new, :create]
 
   get "search", to: "products#search", as: :search
