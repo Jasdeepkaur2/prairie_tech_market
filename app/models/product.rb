@@ -13,10 +13,10 @@ class Product < ApplicationRecord
   scope :recently_updated, -> { where(updated_at: 3.days.ago..).where.not(created_at: 3.days.ago..) }
 
   def self.ransackable_attributes(auth_object = nil)
-    ["id", "name", "description", "price", "stock", "category_id", "on_sale", "is_new", "created_at", "updated_at"]
+    [ "id", "name", "description", "price", "stock", "category_id", "on_sale", "is_new", "created_at", "updated_at" ]
   end
 
   def self.ransackable_associations(auth_object = nil)
-    ["category", "tags"]
+    [ "category", "tags" ]
   end
 end

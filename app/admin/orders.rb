@@ -36,7 +36,7 @@ ActiveAdmin.register Order do
 
   form do |f|
     f.inputs do
-      f.input :status, as: :select, collection: ["pending", "paid", "shipped"]
+      f.input :status, as: :select, collection: [ "pending", "paid", "shipped" ]
     end
     f.actions
   end

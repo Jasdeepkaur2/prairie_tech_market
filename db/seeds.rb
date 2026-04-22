@@ -320,7 +320,7 @@ additional_products = [
   { name: "Philips 32\" 4K Monitor", description: "32 inch 4K UHD monitor with HDR and USB-C connectivity", price: 349.99, stock: 11, category: "Monitors & Displays" },
   { name: "Corsair Vengeance 16GB DDR4", description: "16GB DDR4 3200MHz RAM kit for gaming and productivity", price: 59.99, stock: 35, category: "Computer Components" },
   { name: "SteelSeries QcK Gaming Mousepad", description: "Large gaming mousepad with micro-woven cloth surface", price: 29.99, stock: 45, category: "Gaming Accessories" },
-  { name: "Belkin 12-Outlet Surge Protector", description: "12 outlet surge protector with 8 foot power cord", price: 39.99, stock: 30, category: "Home Office" },
+  { name: "Belkin 12-Outlet Surge Protector", description: "12 outlet surge protector with 8 foot power cord", price: 39.99, stock: 30, category: "Home Office" }
 ]
 
 additional_products.each do |p|

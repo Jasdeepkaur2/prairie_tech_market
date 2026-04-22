@@ -11,10 +11,10 @@ class User < ApplicationRecord
   validates :address, format: { with: /\A[\d\w\s\-\.\,]+\z/, message: "is invalid" }, allow_blank: true
 
   def self.ransackable_attributes(auth_object = nil)
-    ["id", "name", "email", "admin", "city", "address", "postal_code", "province_id", "created_at", "updated_at"]
+    [ "id", "name", "email", "admin", "city", "address", "postal_code", "province_id", "created_at", "updated_at" ]
   end
 
   def self.ransackable_associations(auth_object = nil)
-    ["province", "orders"]
+    [ "province", "orders" ]
   end
 end

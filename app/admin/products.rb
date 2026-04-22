@@ -10,7 +10,7 @@ ActiveAdmin.register Product do
     column :stock
     column :on_sale
     column(:tags) { |p| p.tags.map(&:name).join(", ") }
-    column(:image) { |p| image_tag p.image.variant(resize_to_limit: [50, 50]) if p.image.attached? }
+    column(:image) { |p| image_tag p.image.variant(resize_to_limit: [ 50, 50 ]) if p.image.attached? }
     actions
   end
 
@@ -28,7 +28,7 @@ ActiveAdmin.register Product do
       f.input :on_sale
       f.input :category
       f.input :tags, as: :check_boxes, collection: Category.all
-      f.input :image, as: :file, hint: f.object.image.attached? ? image_tag(f.object.image.variant(resize_to_limit: [100, 100])) : "No image uploaded"
+      f.input :image, as: :file, hint: f.object.image.attached? ? image_tag(f.object.image.variant(resize_to_limit: [ 100, 100 ])) : "No image uploaded"
     end
     f.actions
   end
@@ -42,7 +42,7 @@ ActiveAdmin.register Product do
       row :on_sale
       row :category
       row(:tags) { |p| p.tags.map(&:name).join(", ") }
-      row(:image) { |p| image_tag p.image.variant(resize_to_limit: [300, 300]) if p.image.attached? }
+      row(:image) { |p| image_tag p.image.variant(resize_to_limit: [ 300, 300 ]) if p.image.attached? }
     end
   end
 end
