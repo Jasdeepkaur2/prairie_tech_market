@@ -1,0 +1,18 @@
+Hi <%= @order.user.name %>,
+
+Thank you for your order #<%= @order.id %>!
+
+Order Date: <%= @order.order_date.strftime("%B %d, %Y") %>
+Province: <%= @order.province.name %>
+
+Items:
+<% @order_items.each do |item| %>
+- <%= item.product.name %> x<%= item.quantity %> = <%= number_to_currency(item.price_at_purchase * item.quantity) %>
+<% end %>
+
+Subtotal: <%= number_to_currency(@subtotal) %>
+Tax: <%= number_to_currency(@tax) %>
+Total: <%= number_to_currency(@order.total_amount) %>
+
+Thank you for shopping with Prairie Tech Market!
+Winnipeg, Manitoba, Canada

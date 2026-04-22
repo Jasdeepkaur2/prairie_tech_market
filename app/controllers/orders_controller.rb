@@ -43,7 +43,8 @@ class OrdersController < ApplicationController
         )
       end
       session[:cart] = {}
-      redirect_to order_path(order), notice: "Order placed successfully!"
+      OrderMailer.order_confirmation(order).deliver_later
+      redirect_to order_path(order), notice: "Order placed successfully! A confirmation email has been sent."
     else
       render :new, status: :unprocessable_entity
     end
