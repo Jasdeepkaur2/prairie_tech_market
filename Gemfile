@@ -21,7 +21,7 @@ gem "image_processing", "~> 1.2"
 gem "devise", "~> 4.9"
 gem "activeadmin"
 gem "kaminari", "~> 1.2"
-gem "faker", "~> 3.6"
+gem "faker", "~> 3.8"
 gem "bootstrap", "~> 5.3"
 gem "dartsass-rails", "~> 0.5"
 
