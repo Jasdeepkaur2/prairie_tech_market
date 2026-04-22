@@ -10,7 +10,7 @@
   <div class="row">
     <div class="col-md-5">
       <% if @product.image.attached? %>
-        <%= image_tag @product.image, class: "img-fluid rounded shadow" %>
+        <%= image_tag @product.image.variant(resize_to_limit: [800, 600]), class: "img-fluid rounded shadow" %>
       <% else %>
         <div class="bg-secondary rounded d-flex align-items-center justify-content-center" style="height: 350px;">
           <span class="text-white" style="font-size: 5rem;">💻</span>
